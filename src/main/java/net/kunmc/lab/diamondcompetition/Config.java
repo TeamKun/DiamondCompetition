@@ -9,4 +9,5 @@ public class Config {
     public static boolean preventPlacingSomeRedstones = true;
     public static boolean preventPlacingVehicles = true;
     public static boolean preventIgnition = true;
+    public static boolean preventPrimingTNT = true;
 }

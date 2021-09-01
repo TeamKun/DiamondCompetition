@@ -32,18 +32,27 @@ public class PlayerInteractListener implements Listener {
             return;
         }
 
-        Material material = e.getMaterial();
-        if (Config.preventPlacingSomeRedstones && material.equals(Material.REDSTONE)) {
+        Material clicked = e.getClickedBlock().getType();
+        if (!Config.preventPrimingTNT && clicked.equals(Material.TNT)) {
+            return;
+        }
+
+        if (!Config.preventNetherPortal && clicked.equals(Material.OBSIDIAN)) {
+            return;
+        }
+
+        Material hand = e.getMaterial();
+        if (Config.preventPlacingSomeRedstones && hand.equals(Material.REDSTONE)) {
             e.setCancelled(true);
             return;
         }
 
-        if (Config.preventIgnition && material.equals(Material.FLINT_AND_STEEL)) {
+        if (Config.preventIgnition && hand.equals(Material.FLINT_AND_STEEL)) {
             e.setCancelled(true);
             return;
         }
 
-        if (Config.preventPlacingVehicles && vehicleSet.contains(material)) {
+        if (Config.preventPlacingVehicles && vehicleSet.contains(hand)) {
             e.setCancelled(true);
         }
     }
