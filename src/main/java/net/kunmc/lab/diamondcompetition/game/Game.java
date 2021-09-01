@@ -41,6 +41,9 @@ public class Game {
         bukkitTaskList.forEach(BukkitTask::cancel);
         bukkitTaskList.clear();
 
+        //終了時に集計処理を行う
+        new CountDiamondsTask(data).run();
+
         String title;
         if (data.numberOfBlueTeamDiamonds > data.numberOfRedTeamDiamonds) {
             title = ChatColor.BLUE + "青チームの勝利";
