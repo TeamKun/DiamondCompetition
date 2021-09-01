@@ -33,7 +33,7 @@ public class PlayerInteractListener implements Listener {
         }
 
         Material material = e.getMaterial();
-        if (Config.preventPlacingSomeBlock && material.equals(Material.REDSTONE)) {
+        if (Config.preventPlacingSomeRedstones && material.equals(Material.REDSTONE)) {
             e.setCancelled(true);
             return;
         }

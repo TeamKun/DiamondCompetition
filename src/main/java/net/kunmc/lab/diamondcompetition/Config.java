@@ -6,7 +6,7 @@ public class Config {
     public static boolean preventLavaSpreading = true;
     public static boolean preventWaterSpreading = true;
     public static boolean preventNetherPortal = true;
-    public static boolean preventPlacingSomeBlock = true;
+    public static boolean preventPlacingSomeRedstones = true;
     public static boolean preventPlacingVehicles = true;
     public static boolean preventIgnition = true;
 }

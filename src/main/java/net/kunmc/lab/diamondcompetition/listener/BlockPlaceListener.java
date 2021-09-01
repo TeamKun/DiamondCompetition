@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class BlockPlaceListener implements Listener {
-    private final Set<Material> preventMaterialSet = new HashSet<Material>() {{
+    private final Set<Material> redstoneMaterialSet = new HashSet<Material>() {{
         add(Material.DISPENSER);
         add(Material.PISTON_BASE);
         add(Material.PISTON_STICKY_BASE);
@@ -40,7 +40,7 @@ public class BlockPlaceListener implements Listener {
 
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent e) {
-        if (Config.preventPlacingSomeBlock && preventMaterialSet.contains(e.getBlockPlaced().getType())) {
+        if (Config.preventPlacingSomeRedstones && redstoneMaterialSet.contains(e.getBlockPlaced().getType())) {
             e.setCancelled(true);
         }
     }
