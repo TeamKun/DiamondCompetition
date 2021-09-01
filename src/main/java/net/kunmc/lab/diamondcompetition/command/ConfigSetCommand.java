@@ -2,6 +2,7 @@ package net.kunmc.lab.diamondcompetition.command;
 
 import net.kunmc.lab.diamondcompetition.Config;
 import net.kunmc.lab.diamondcompetition.DiamondCompetition;
+import net.kunmc.lab.diamondcompetition.game.Game;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
@@ -25,6 +26,11 @@ public class ConfigSetCommand implements SubCommand {
                 }
                 configItemList.add(new ConfigItem(field, null));
             }
+
+            Field dataField = Game.class.getDeclaredField("data");
+            dataField.setAccessible(true);
+            Object data = dataField.get(DiamondCompetition.game);
+            configItemList.add(new ConfigItem(data.getClass().getDeclaredField("remainingTime"), data));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -106,6 +112,7 @@ class ConfigItem {
 
     public Object getValue() {
         try {
+            field.setAccessible(true);
             return field.get(target);
         } catch (Exception e) {
             e.printStackTrace();
