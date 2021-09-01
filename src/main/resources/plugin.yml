@@ -8,4 +8,5 @@ commands:
       /diamondcompetition stop
       /diamondcompetition config set <configItem> <value>
       /diamondcompetition config show
+      /diamondcompetition shuffleplayers
     permission: op
