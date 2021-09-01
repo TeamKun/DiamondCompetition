@@ -12,6 +12,7 @@ public class MainCommand implements TabExecutor {
     private final Map<String, SubCommand> subCmdMap = new HashMap<String, SubCommand>() {{
         put("start", new StartCommand());
         put("stop", new StopCommand());
+        put("config", new ConfigCommand());
     }};
 
     @Override

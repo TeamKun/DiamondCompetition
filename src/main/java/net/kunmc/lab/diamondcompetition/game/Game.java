@@ -24,7 +24,7 @@ public class Game {
         if (isStarted) {
             return false;
         }
-        
+
         isStarted = true;
         bukkitTaskList.add(new StartTask().runTaskTimer(DiamondCompetition.instance, 0, 20));
         data.remainingTime = Config.matchTime;
@@ -57,7 +57,7 @@ public class Game {
     }
 
     public boolean changeUpdateInterval(int updateInterval) {
-        if (isStarted) {
+        if (!isStarted) {
             return false;
         }
 

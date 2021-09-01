@@ -3,4 +3,10 @@ version: '${project.version}'
 main: net.kunmc.lab.diamondcompetition.DiamondCompetition
 commands:
   diamondcompetition:
+    usage: |-
+      /diamondcompetition start
+      /diamondcompetition stop
+      /diamondcompetition config set <configItem> <value>
+      /diamondcompetition config show
+      /diamondcompetition changeupdateinterval <value>
     permission: op
