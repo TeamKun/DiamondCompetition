@@ -8,5 +8,4 @@ commands:
       /diamondcompetition stop
       /diamondcompetition config set <configItem> <value>
       /diamondcompetition config show
-      /diamondcompetition changeupdateinterval <value>
     permission: op
