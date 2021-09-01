@@ -7,6 +7,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
+import org.bukkit.scoreboard.Scoreboard;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,9 @@ public class Game {
         if (isStarted) {
             return false;
         }
+
+        Scoreboard scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
+        scoreboard.getEntries().forEach(scoreboard::resetScores);
 
         isStarted = true;
         bukkitTaskList.add(new StartTask().runTaskTimer(DiamondCompetition.instance, 0, 20));

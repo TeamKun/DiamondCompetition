@@ -28,15 +28,19 @@ class CountDiamondsTask extends BukkitRunnable {
         int blueTotal = 0;
         for (Player p : blueTeamPlayers) {
             PlayerInventory inv = p.getInventory();
-
-            blueTotal += inv.all(Material.DIAMOND).values().stream()
+            int numberOfDiamonds = 0;
+            numberOfDiamonds += inv.all(Material.DIAMOND).values().stream()
                     .mapToInt(ItemStack::getAmount)
                     .sum();
 
             ItemStack offhand = inv.getItemInOffHand();
             if (offhand.getType().equals(Material.DIAMOND)) {
-                blueTotal += offhand.getAmount();
+                numberOfDiamonds += offhand.getAmount();
             }
+
+            Utils.getObjective().getScore(p.getName()).setScore(numberOfDiamonds);
+
+            blueTotal += numberOfDiamonds;
         }
         data.numberOfBlueTeamDiamonds = blueTotal;
 
@@ -47,15 +51,20 @@ class CountDiamondsTask extends BukkitRunnable {
         int redTotal = 0;
         for (Player p : redTeamPlayers) {
             PlayerInventory inv = p.getInventory();
+            int numberOfDiamonds = 0;
 
-            redTotal += inv.all(Material.DIAMOND).values().stream()
+            numberOfDiamonds += inv.all(Material.DIAMOND).values().stream()
                     .mapToInt(ItemStack::getAmount)
                     .sum();
 
             ItemStack offhand = inv.getItemInOffHand();
             if (offhand.getType().equals(Material.DIAMOND)) {
-                redTotal += offhand.getAmount();
+                numberOfDiamonds += offhand.getAmount();
             }
+
+            Utils.getObjective().getScore(p.getName()).setScore(numberOfDiamonds);
+
+            redTotal += numberOfDiamonds;
         }
         data.numberOfRedTeamDiamonds = redTotal;
     }

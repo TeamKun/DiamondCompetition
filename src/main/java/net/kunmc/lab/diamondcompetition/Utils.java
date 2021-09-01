@@ -1,6 +1,8 @@
 package net.kunmc.lab.diamondcompetition;
 
 import org.bukkit.ChatColor;
+import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
@@ -29,5 +31,16 @@ public class Utils {
         redTeam.setPrefix(ChatColor.RED.toString());
 
         return redTeam;
+    }
+
+    public static Objective getObjective() {
+        Scoreboard scoreboard = getServer().getScoreboardManager().getMainScoreboard();
+        Objective objective = scoreboard.getObjective(Const.objectiveName);
+        if (objective == null) {
+            objective = scoreboard.registerNewObjective(Const.objectiveName, "dummy");
+            objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+        }
+
+        return objective;
     }
 }
