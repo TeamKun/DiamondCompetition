@@ -1,0 +1,36 @@
+h1. DiamondCompetition
+
+paper 1.12.2
+
+h2. コマンド
+
+* diamondcompetition
+** start
+** stop
+** shuffleplayers
+全てのプレイヤーをランダムにチームに割り当てる
+** config
+*** show
+*** set
+**** &lt;configItem>
+***** &lt;value>
+
+h3. 設定項目
+
+* matchTime&lt;Integer> (3600)
+試合時間の秒数
+ゲームを開始する前に設定する
+* updateInterval&lt;Integer> (4)
+ダイヤモンドの数を更新する頻度(tick)
+* preventLavaSpreading&lt;Boolean> (true)
+溶岩を置いたときに広がるか否か
+* preventWaterSpreading&lt;Boolean> (true)
+水を置いたときに広がるか否か
+* preventNetherPortal&lt;Boolean> (true)
+ネザーポータルに着火したときにポータルが生成されるか否か
+* preventPlacingSomeRedstones&lt;Boolean> (true)
+上記の画像のレッドストーン周りのブロックを置けるか否か
+* preventPlacingVehicles&lt;Boolean> (true)
+ボート類とトロッコ類を置けるか否か
+* preventIgnition&lt;Boolean> (true)
+着火出来るか否か
