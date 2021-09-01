@@ -51,6 +51,9 @@ public class Game {
         }
         Bukkit.getOnlinePlayers().forEach(p -> {
             p.sendTitle(title, "", 0, 100, 10);
+
+            p.sendMessage(ChatColor.BLUE + "青チーム:" + data.numberOfBlueTeamDiamonds);
+            p.sendMessage(ChatColor.RED + "赤チーム:" + data.numberOfRedTeamDiamonds);
         });
 
         return true;
