@@ -3,6 +3,7 @@ package net.kunmc.lab.diamondcompetition.command;
 import net.kunmc.lab.diamondcompetition.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Team;
@@ -21,6 +22,7 @@ public class ShufflePlayersCommand implements SubCommand {
         playerList = playerList.stream()
                 .filter(p -> !blueTeam.hasEntry(p.getName()))
                 .filter(p -> !redTeam.hasEntry(p.getName()))
+                .filter(p -> p.getGameMode().equals(GameMode.SURVIVAL) || p.getGameMode().equals(GameMode.ADVENTURE))
                 .collect(Collectors.toList());
         Collections.shuffle(playerList);
 
