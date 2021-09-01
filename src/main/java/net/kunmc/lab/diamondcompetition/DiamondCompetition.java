@@ -2,6 +2,7 @@ package net.kunmc.lab.diamondcompetition;
 
 import net.kunmc.lab.diamondcompetition.command.MainCommand;
 import net.kunmc.lab.diamondcompetition.game.Game;
+import net.kunmc.lab.diamondcompetition.listener.BlockFromToListener;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -20,6 +21,8 @@ public final class DiamondCompetition extends JavaPlugin {
         TabExecutor command = new MainCommand();
         getServer().getPluginCommand("diamondcompetition").setExecutor(command);
         getServer().getPluginCommand("diamondcompetition").setTabCompleter(command);
+
+        getServer().getPluginManager().registerEvents(new BlockFromToListener(), this);
     }
 
     @Override
