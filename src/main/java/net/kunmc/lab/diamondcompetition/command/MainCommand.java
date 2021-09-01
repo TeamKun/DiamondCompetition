@@ -13,6 +13,7 @@ public class MainCommand implements TabExecutor {
         put("start", new StartCommand());
         put("stop", new StopCommand());
         put("config", new ConfigCommand());
+        put("shuffleplayers", new ShufflePlayersCommand());
     }};
 
     @Override
