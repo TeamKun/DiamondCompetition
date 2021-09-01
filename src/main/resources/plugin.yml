@@ -1,3 +1,6 @@
 name: DiamondCompetition
 version: '${project.version}'
 main: net.kunmc.lab.diamondcompetition.DiamondCompetition
+commands:
+  diamondcompetition:
+    permission: op
