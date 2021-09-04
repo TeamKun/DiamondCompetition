@@ -19,9 +19,7 @@ public class BlockPlaceListener implements Listener {
         add(Material.WOOD_PLATE);
         add(Material.REDSTONE_TORCH_ON);
         add(Material.REDSTONE_TORCH_OFF);
-        add(Material.STONE_BUTTON);
         add(Material.TRIPWIRE_HOOK);
-        add(Material.WOOD_BUTTON);
         add(Material.TRAPPED_CHEST);
         add(Material.GOLD_PLATE);
         add(Material.IRON_PLATE);

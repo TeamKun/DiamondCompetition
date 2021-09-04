@@ -3,14 +3,14 @@ package net.kunmc.lab.diamondcompetition.game;
 import net.kunmc.lab.diamondcompetition.Config;
 import net.kunmc.lab.diamondcompetition.DiamondCompetition;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.Team;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Game {
     private boolean isStarted = false;
@@ -25,11 +25,12 @@ public class Game {
         if (isStarted) {
             return false;
         }
+        isStarted = true;
 
         Scoreboard scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
         scoreboard.getEntries().forEach(scoreboard::resetScores);
+        data.teamToScoreMap.clear();
 
-        isStarted = true;
         bukkitTaskList.add(new StartTask().runTaskTimer(DiamondCompetition.instance, 0, 20));
         data.remainingTime = Config.matchTime;
 
@@ -48,22 +49,32 @@ public class Game {
         //終了時に集計処理を行う
         new CountDiamondsTask(data).run();
 
-        String title;
-        if (data.numberOfBlueTeamDiamonds > data.numberOfRedTeamDiamonds) {
-            title = ChatColor.BLUE + "青チームの勝利";
-        } else if (data.numberOfBlueTeamDiamonds < data.numberOfRedTeamDiamonds) {
-            title = ChatColor.RED + "赤チームの勝利";
-        } else {
-            title = ChatColor.GREEN + "引き分け";
+        List<Team> teamList = rankedTeamList();
+        if (teamList.isEmpty()) {
+            return true;
         }
+        
+        Team firstTeam = teamList.get(0);
+        String title = firstTeam.getColor() + firstTeam.getName() + "チームの勝利";
+
         Bukkit.getOnlinePlayers().forEach(p -> {
             p.sendTitle(title, "", 0, 100, 10);
 
-            p.sendMessage(ChatColor.BLUE + "青チーム:" + data.numberOfBlueTeamDiamonds);
-            p.sendMessage(ChatColor.RED + "赤チーム:" + data.numberOfRedTeamDiamonds);
+            for (int i = 0; i < teamList.size(); i++) {
+                Team team = teamList.get(i);
+                p.sendMessage(String.format("%s%d位 %s %d個", team.getColor().toString(), i + 1, team.getName(), data.teamToScoreMap.get(team)));
+            }
         });
 
         return true;
+    }
+
+    private List<Team> rankedTeamList() {
+        List<Team> list = Arrays.stream(data.teamToScoreMap.keySet().toArray(new Team[0]))
+                .sorted(Comparator.comparingInt(x -> data.teamToScoreMap.get(x)))
+                .collect(Collectors.toList());
+        Collections.reverse(list);
+        return list;
     }
 
     public boolean changeUpdateInterval(int updateInterval) {
@@ -92,9 +103,6 @@ public class Game {
 
     private class StartTask extends BukkitRunnable {
         private int time = 5;
-
-        StartTask() {
-        }
 
         @Override
         public void run() {

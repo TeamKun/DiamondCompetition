@@ -1,7 +1,11 @@
 package net.kunmc.lab.diamondcompetition.game;
 
+import org.bukkit.scoreboard.Team;
+
+import java.util.HashMap;
+import java.util.Map;
+
 class Data {
-    int numberOfBlueTeamDiamonds = 0;
-    int numberOfRedTeamDiamonds = 0;
+    Map<Team, Integer> teamToScoreMap = new HashMap<>();
     int remainingTime = 0;
 }

@@ -3,6 +3,9 @@ package net.kunmc.lab.diamondcompetition.game;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scoreboard.Team;
+
+import java.util.Map;
 
 class UpdateActionbarTask extends BukkitRunnable {
     private final Data data;
@@ -22,11 +25,13 @@ class UpdateActionbarTask extends BukkitRunnable {
         StringBuilder builder = new StringBuilder();
         builder.append('(');
 
-        builder.append(ChatColor.BLUE).append("青チーム:").append(data.numberOfBlueTeamDiamonds).append(' ');
-        builder.append(ChatColor.RED).append("赤チーム:").append(data.numberOfRedTeamDiamonds).append(' ');
-        builder.append(ChatColor.WHITE);
-        builder.append("残り");
+        for (Map.Entry<Team, Integer> entry : data.teamToScoreMap.entrySet()) {
+            Team team = entry.getKey();
+            int numberOfDiamonds = entry.getValue();
+            builder.append(team.getColor()).append(team.getName().charAt(0)).append(":").append(numberOfDiamonds).append(' ');
+        }
 
+        builder.append(ChatColor.WHITE).append("残り");
         int time = data.remainingTime;
         int hours = time / 3600;
         int minutes = time % 3600 / 60;

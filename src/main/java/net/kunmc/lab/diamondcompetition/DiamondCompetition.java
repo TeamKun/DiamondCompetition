@@ -18,13 +18,10 @@ public final class DiamondCompetition extends JavaPlugin {
         instance = this;
         game = new Game();
 
-        Utils.getBlueTeam();
-        Utils.getRedTeam();
-
         TabExecutor command = new MainCommand();
         getServer().getPluginCommand("diamondcompetition").setExecutor(command);
         getServer().getPluginCommand("diamondcompetition").setTabCompleter(command);
-        
+
         getServer().getPluginManager().registerEvents(new BlockFromToListener(), this);
         getServer().getPluginManager().registerEvents(new PortalCreateListener(), this);
         getServer().getPluginManager().registerEvents(new BlockPlaceListener(), this);
